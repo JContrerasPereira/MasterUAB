@@ -20,7 +20,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Test.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Enemies\BossEnemy.cpp">
       <Filter>Enemies</Filter>
@@ -34,6 +33,7 @@
     <ClCompile Include="Enemies\PatrolEnemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\MasterUAB - copia\MasterUAB\Test\Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemies">
