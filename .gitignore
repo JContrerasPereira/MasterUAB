@@ -29,8 +29,8 @@
 
 *.tlog
 
-MasterUAB/bin/Intermediate
-MasterUAB/Test/Debug
-MasterUAB/Test/Release
-MasterUAB/Videogame/Debug
-MasterUAB/Videogame/Release
+bin/Intermediate
+Test/Debug
+Test/Release
+Videogame/Debug
+Videogame/Release
