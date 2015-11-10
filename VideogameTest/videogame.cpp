@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <d3d11.h>
+#include "ContextManager.h"
 
 //#pragma comment(lib,"d3dx11.lib")
 #pragma comment(lib,"d3d11.lib")
@@ -9,42 +10,6 @@
 #define APPLICATION_NAME	"VIDEOGAME TEST"
 #define WIDTH_APPLICATION	800
 #define HEIGHT_APPLICATION	600
-
-HRESULT CreateContext(HWND hWnd) {
-	// Tendremos que crear y rellenar una estructura de este tipo
-	DXGI_SWAP_CHAIN_DESC desc;
-	ZeroMemory(&desc, sizeof(desc));
-	// o
-	//DXGI_SWAP_CHAIN_DESC desc = {};
-	desc.BufferCount = 1;
-	desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	desc.Windowed = TRUE;
-	desc.BufferDesc.Width = WIDTH_APPLICATION;
-	desc.BufferDesc.Height = HEIGHT_APPLICATION;
-	desc.BufferDesc.RefreshRate.Numerator = 1;
-	desc.BufferDesc.RefreshRate.Denominator = 60;
-	desc.OutputWindow = hWnd;
-	desc.SampleDesc.Count = 1;
-	desc.SampleDesc.Quality = 0;
-
-	// Que DirectX queremos
-	D3D_FEATURE_LEVEL featureLevels[] =
-	{
-		D3D_FEATURE_LEVEL_11_0,
-		D3D_FEATURE_LEVEL_10_1,
-		D3D_FEATURE_LEVEL_10_0,
-	};
-	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
-
-
-	ID3D11Device *l_D3DDevice; // esta clase, el device, nos sirve para crear objetos de DirectX
-	ID3D11DeviceContext *l_DeviceContext; // el contexto nos va a servir para usar objetos de DirectX
-	IDXGISwapChain *l_SwapChain; // la cadena de swap
-	HRESULT result = FAILED(D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, featureLevels, numFeatureLevels, D3D11_SDK_VERSION, &desc, &l_SwapChain, &l_D3DDevice, NULL, &l_DeviceContext));
-
-	return result;
-}
 
 //-----------------------------------------------------------------------------
 // Name: MsgProc()
@@ -83,46 +48,49 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 //-----------------------------------------------------------------------
 int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow)
 {
-  // Register the window class
-  WNDCLASSEX wc = {	sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
+	CContextManager *l_context = new CContextManager();
+	ID3D11RenderTargetView *l_RenderTargetView;
 
-  RegisterClassEx( &wc );
+	// Register the window class
+	WNDCLASSEX wc = {	sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
 
-  RECT rc = {
-	  0, 0, WIDTH_APPLICATION, HEIGHT_APPLICATION
-  };
-  AdjustWindowRect( &rc, WS_OVERLAPPEDWINDOW, FALSE);
+	RegisterClassEx( &wc );
 
-  // Create the application's window
-  HWND hWnd = CreateWindow( APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, wc.hInstance, NULL);
+	RECT rc = {
+		0, 0, WIDTH_APPLICATION, HEIGHT_APPLICATION
+	};
+	AdjustWindowRect( &rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-  CreateContext(hWnd);
+	// Create the application's window
+	HWND hWnd = CreateWindow( APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, wc.hInstance, NULL);
 
-  // Añadir aquí el Init de la applicacioón
+	l_context->InitDevice(hWnd, WIDTH_APPLICATION, HEIGHT_APPLICATION);
 
-  ShowWindow( hWnd, SW_SHOWDEFAULT );
-  //CreateBackBuffer( hWnd );
-  UpdateWindow( hWnd );
-  MSG msg;
-  ZeroMemory( &msg, sizeof(msg) );
+	ShowWindow( hWnd, SW_SHOWDEFAULT );
+	l_context->CreateRenderTarget();
+	UpdateWindow( hWnd );
+	MSG msg;
+	ZeroMemory( &msg, sizeof(msg) );
 
-  // Añadir en el while la condición de salida del programa de la aplicación
+	// Añadir en el while la condición de salida del programa de la aplicación
 
-  while( msg.message != WM_QUIT )
-  {
-    if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
-    {
-      TranslateMessage( &msg );
-      DispatchMessage( &msg );
-    }
-    else
-    {
-       // Main loop: Añadir aquí el Update y Render de la aplicación principal
-    }
-  }
-  UnregisterClass( APPLICATION_NAME, wc.hInstance );
+	while( msg.message != WM_QUIT )
+	{
+	if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
+	{
+		TranslateMessage( &msg );
+		DispatchMessage( &msg );
+	}
+	else
+	{
+		// Main loop: Añadir aquí el Update y Render de la aplicación principal
+		l_context->BeginRender();
+		l_context->EndRender();
+	}
+	}
+	UnregisterClass( APPLICATION_NAME, wc.hInstance );
 
-  // Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
+	// Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
 
-  return 0;
+	return 0;
 }
