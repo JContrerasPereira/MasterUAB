@@ -64,10 +64,10 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	// Create the application's window
 	HWND hWnd = CreateWindow( APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, wc.hInstance, NULL);
 
-	l_context->InitDevice(hWnd, WIDTH_APPLICATION, HEIGHT_APPLICATION);
+	//l_context->InitDevice(hWnd, WIDTH_APPLICATION, HEIGHT_APPLICATION);
 
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
-	l_context->CreateRenderTarget();
+	//l_context->CreateRenderTarget();
 	UpdateWindow( hWnd );
 	MSG msg;
 	ZeroMemory( &msg, sizeof(msg) );
@@ -84,8 +84,8 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	else
 	{
 		// Main loop: Añadir aquí el Update y Render de la aplicación principal
-		l_context->BeginRender();
-		l_context->EndRender();
+		//l_context->BeginRender();
+		//l_context->EndRender();
 	}
 	}
 	UnregisterClass( APPLICATION_NAME, wc.hInstance );

@@ -7,8 +7,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="videogame.cpp" />
     <ClCompile Include="H:\Motor3d\motor3d.cpp" />
     <ClCompile Include="H:\Motor3d\shaderCode.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="videogame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h" />
   </ItemGroup>
 </Project>
