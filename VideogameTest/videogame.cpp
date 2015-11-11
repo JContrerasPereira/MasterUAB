@@ -1,9 +1,12 @@
 #include <Windows.h>
 #include <d3d11.h>
 #include "ContextManager.h"
+#include "DebugRender.h"
+#include "Application.h"
 
 //#pragma comment(lib,"d3dx11.lib")
 #pragma comment(lib,"d3d11.lib")
+#pragma comment(lib,"winmm.lib")
 //#pragma comment(lib,"dxerr.lib")
 //#pragma comment(lib,"dxguid.lib")
 
@@ -48,8 +51,10 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 //-----------------------------------------------------------------------
 int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow)
 {
-	CContextManager *l_context = new CContextManager();
-	ID3D11RenderTargetView *l_RenderTargetView;
+	CContextManager l_context;
+	DWORD l_CurrentTime = 0;
+	float l_ElapsedTime = 0;
+	float l_PreviousTime = 0;
 
 	// Register the window class
 	WNDCLASSEX wc = {	sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
@@ -63,11 +68,16 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
 	// Create the application's window
 	HWND hWnd = CreateWindow( APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, wc.hInstance, NULL);
-
-	//l_context->InitDevice(hWnd, WIDTH_APPLICATION, HEIGHT_APPLICATION);
+	
+	l_context.CreateContext(hWnd, WIDTH_APPLICATION, HEIGHT_APPLICATION);
 
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
-	//l_context->CreateRenderTarget();
+	l_context.CreateBackBuffer(hWnd, WIDTH_APPLICATION, HEIGHT_APPLICATION);
+	l_context.InitStates();
+	CDebugRender l_DebugRender(l_context.GetDevice());
+
+	CApplication application(&l_DebugRender, &l_context);
+
 	UpdateWindow( hWnd );
 	MSG msg;
 	ZeroMemory( &msg, sizeof(msg) );
@@ -84,8 +94,11 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	else
 	{
 		// Main loop: Añadir aquí el Update y Render de la aplicación principal
-		//l_context->BeginRender();
-		//l_context->EndRender();
+		l_CurrentTime = timeGetTime();
+		l_ElapsedTime = (float)(l_CurrentTime - l_PreviousTime)*0.001f;
+		l_PreviousTime = l_CurrentTime;
+		application.Update(l_ElapsedTime);
+		application.Render();
 	}
 	}
 	UnregisterClass( APPLICATION_NAME, wc.hInstance );

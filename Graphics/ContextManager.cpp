@@ -272,15 +272,17 @@ void CContextManager::InitRasterizedStates()
 	}
 
 	{
-		D3D11_RASTERIZER_DESC l_WireframeDesc;
-		ZeroMemory(&l_WireframeDesc, sizeof(D3D11_RASTERIZER_DESC));
+		D3D11_RASTERIZER_DESC l_SolidDesc;
+		ZeroMemory(&l_SolidDesc, sizeof(D3D11_RASTERIZER_DESC));
+		l_SolidDesc.FillMode = D3D11_FILL_SOLID;
+		l_SolidDesc.CullMode = D3D11_CULL_BACK;
+		l_SolidDesc.FrontCounterClockwise = true;
 
-		// TODO solid state
-
-		//HRESULT l_HR = m_D3DDevice->CreateRasterizerState(&l_WireframeDesc, &m_RS[RS_SOLID]);
-		//assert(l_HR == S_OK);
+		HRESULT l_HR = m_D3DDevice->CreateRasterizerState(&l_SolidDesc, &m_RS[RS_SOLID]);
+		assert(l_HR == S_OK);
 	}
 }
+
 
 extern LRESULT ImGui_ImplDX11_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 LRESULT WINAPI CContextManager::MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

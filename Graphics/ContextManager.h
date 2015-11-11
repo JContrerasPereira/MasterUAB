@@ -19,6 +19,21 @@ public:
 		RS_COUNT
 	};
 
+	enum EDepthStencilState
+	{
+		DSS_WIREFRAME,
+		DSS_SOLID,
+
+		DSS_COUNT
+	};
+
+	enum EBlendState
+	{
+		BS_WIREFRAME,
+
+		BS_COUNT
+	};
+
 public:
 	CContextManager();
 	~CContextManager();
@@ -58,7 +73,7 @@ private:
 
 
 	ID3D11RasterizerState*	m_RS[RS_COUNT];
-	// TODO ID3D11DepthStencilState
-	// TODO ID3D11BlendState
+	ID3D11DepthStencilState* m_DSS[DSS_COUNT];
+	ID3D11BlendState* m_BS[BS_COUNT];
 };
 

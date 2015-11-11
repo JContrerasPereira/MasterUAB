@@ -47,8 +47,8 @@ CDebugRender::CDebugRender(ID3D11Device* _Device)
 	MV_POSITION_COLOR_VERTEX l_SimpleTriangleVtxs[3] =
 	{
 		{ Vect3f(-0.5f, -0.5f, 0.5f), CColor(1.0f, 0.0f, 0.0f, 1.0f) },
-		{ Vect3f(+0.0f, +0.5f, 0.5f), CColor(0.0f, 1.0f, 0.0f, 1.0f) },
-		{ Vect3f(+0.5f, -0.5f, 0.5f), CColor(0.0f, 0.0f, 1.0f, 1.0f) },
+		{ Vect3f(+0.0f, +0.5f, 0.5f), CColor(1.0f, 0.0f, 0.0f, 1.0f) },
+		{ Vect3f(+0.5f, -0.5f, 0.5f), CColor(1.0f, 0.0f, 0.0f, 1.0f) },
 	};
 
 	m_SimpleTriangle = new CTrianglesListRenderableVertexs<MV_POSITION_COLOR_VERTEX>(_Device, l_SimpleTriangleVtxs, 3, 1);
@@ -73,14 +73,14 @@ CDebugRender::CDebugRender(ID3D11Device* _Device)
 	// Simple Cube
 	MV_POSITION_COLOR_VERTEX l_SimpleCubeVtxs[] =
 	{
-		{ Vect3f(+0.5f, 0.0f, +0.5f), CColor(0.0f, 1.0f, 1.0f, 1.0f) },   // 0
+		{ Vect3f(+0.5f, 0.0f, +0.5f), CColor(1.0f, 0.0f, 0.0f, 1.0f) },   // 0
 		{ Vect3f(+0.5f, 0.0f, -0.5f), CColor(0.0f, 1.0f, 0.0f, 1.0f) },  // 1
-		{ Vect3f(-0.5f, 0.0f, -0.5f), CColor(0.0f, 0.0f, 0.0f, 1.0f) }, // 2
-		{ Vect3f(-0.5f, 0.0f, +0.5f), CColor(0.0f, 0.0f, 1.0f, 1.0f) },  // 3
-		{ Vect3f(+0.5f, 1.0f, +0.5f), CColor(1.0f, 1.0f, 1.0f, 1.0f) },   // 4
-		{ Vect3f(+0.5f, 1.0f, -0.5f), CColor(1.0f, 1.0f, 0.0f, 1.0f) },  // 5
-		{ Vect3f(-0.5f, 1.0f, -0.5f), CColor(1.0f, 0.0f, 0.0f, 1.0f) },   // 6
-		{ Vect3f(-0.5f, 1.0f, +0.5f), CColor(1.0f, 0.0f, 1.0f, 1.0f) },  // 7
+		{ Vect3f(-0.5f, 0.0f, -0.5f), CColor(0.0f, 0.0f, 1.0f, 1.0f) }, // 2
+		{ Vect3f(-0.5f, 0.0f, +0.5f), CColor(1.0f, 1.0f, 0.0f, 1.0f) },  // 3
+		{ Vect3f(+0.5f, 1.0f, +0.5f), CColor(1.0f, 0.0f, 1.0f, 1.0f) },   // 4
+		{ Vect3f(+0.5f, 1.0f, -0.5f), CColor(1.0f, 1.0f, 1.0f, 1.0f) },  // 5
+		{ Vect3f(-0.5f, 1.0f, -0.5f), CColor(0.0f, 1.0f, 0.0f, 1.0f) },   // 6
+		{ Vect3f(-0.5f, 1.0f, +0.5f), CColor(0.0f, 1.0f, 1.0f, 1.0f) },  // 7
 	};
 
 	/*
