@@ -3,6 +3,7 @@
 #include "ContextManager.h"
 #include "DebugRender.h"
 #include "Application.h"
+#include "InputManagerImplementation.h"
 
 //#pragma comment(lib,"d3dx11.lib")
 #pragma comment(lib,"d3d11.lib")
@@ -13,6 +14,8 @@
 #define APPLICATION_NAME	"VIDEOGAME TEST"
 #define WIDTH_APPLICATION	800
 #define HEIGHT_APPLICATION	600
+
+CContextManager l_context;
 
 //-----------------------------------------------------------------------------
 // Name: MsgProc()
@@ -29,17 +32,12 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
       return 0;
     }
     break;
-  case WM_KEYDOWN:
-    {
-      switch( wParam )
-      {
-      case VK_ESCAPE:
-        //Cleanup();
-        PostQuitMessage( 0 );
-        return 0;
-        break;
-      }
-    }
+  case WM_SIZE:
+	  if (wParam != SIZE_MINIMIZED)
+	  {
+		  l_context.Resize(hWnd, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
+	  }
+	  return 0;
     break;
   }//end switch( msg )
 
@@ -51,10 +49,15 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 //-----------------------------------------------------------------------
 int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow)
 {
-	CContextManager l_context;
 	DWORD l_CurrentTime = 0;
 	float l_ElapsedTime = 0;
 	float l_PreviousTime = 0;
+	CInputManagerImplementation *l_InputManager = new CInputManagerImplementation();
+
+
+	CInputManager::SetCurrentInputManager(l_InputManager);
+
+	l_InputManager->LoadCommandsFromFile("Data\\input.xml");
 
 	// Register the window class
 	WNDCLASSEX wc = {	sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
@@ -75,8 +78,9 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	l_context.CreateBackBuffer(hWnd, WIDTH_APPLICATION, HEIGHT_APPLICATION);
 	l_context.InitStates();
 	CDebugRender l_DebugRender(l_context.GetDevice());
+	CSphericalCameraController l_Camera;
 
-	CApplication application(&l_DebugRender, &l_context);
+	CApplication application(&l_DebugRender, &l_context, &l_Camera);
 
 	UpdateWindow( hWnd );
 	MSG msg;
@@ -86,20 +90,36 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
 	while( msg.message != WM_QUIT )
 	{
-	if( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
-	{
-		TranslateMessage( &msg );
-		DispatchMessage( &msg );
-	}
-	else
-	{
-		// Main loop: Añadir aquí el Update y Render de la aplicación principal
-		l_CurrentTime = timeGetTime();
-		l_ElapsedTime = (float)(l_CurrentTime - l_PreviousTime)*0.001f;
-		l_PreviousTime = l_CurrentTime;
-		application.Update(l_ElapsedTime);
-		application.Render();
-	}
+		if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+		{
+			switch (msg.message)
+			{
+			case WM_SYSKEYDOWN:
+			case WM_SYSKEYUP:
+			case WM_KEYDOWN:
+			case WM_KEYUP:
+				if (!l_InputManager->KeyEventReceived(msg.wParam, msg.lParam))
+				{
+					TranslateMessage(&msg);
+					DispatchMessage(&msg);
+				}
+				break;
+			default:
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+		}
+		else
+		{
+			l_InputManager->BeginFrame();
+			// Main loop: Añadir aquí el Update y Render de la aplicación principal
+			l_CurrentTime = timeGetTime();
+			l_ElapsedTime = (float)(l_CurrentTime - l_PreviousTime)*0.001f;
+			l_PreviousTime = l_CurrentTime;
+			application.Update(l_ElapsedTime);
+			application.Render();
+			l_InputManager->EndFrame();
+		}
 	}
 	UnregisterClass( APPLICATION_NAME, wc.hInstance );
 

@@ -48,6 +48,7 @@ public:
 	void BeginRender();
 	void EndRender();
 	void Draw(CRenderableVertexs* _VerticesToRender, ERasterizedState _RS);
+	void Resize(HWND hWnd, unsigned int Width, unsigned int Height);
 
 	ID3D11Device* GetDevice() const { return m_D3DDevice; }
 	ID3D11DeviceContext* GetDeviceContext() const { return m_DeviceContext; }
@@ -57,6 +58,8 @@ public:
 	void SetCamera(const Mat44f& _View, const Mat44f& _Projection) { m_Parameters.m_View = _View; m_Parameters.m_Projection = _Projection; }
 	void SetCamera(const CCamera& _Camera) { m_Parameters.m_View = _Camera.GetView(); m_Parameters.m_Projection = _Camera.GetProjection(); }
 	void SetDebugSize(float _Size) { m_Parameters.m_DebugRenderScale = _Size; }
+
+	float GetAspectRatio() const { return (float)m_Width / m_Height; }
 
 private:
 
@@ -71,6 +74,8 @@ private:
 
 	CEffectParameters m_Parameters;
 
+	int m_Width;
+	int m_Height;
 
 	ID3D11RasterizerState*	m_RS[RS_COUNT];
 	ID3D11DepthStencilState* m_DSS[DSS_COUNT];

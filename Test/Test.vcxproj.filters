@@ -33,7 +33,7 @@
     <ClCompile Include="Enemies\PatrolEnemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\MasterUAB - copia\MasterUAB\Test\Test.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemies">

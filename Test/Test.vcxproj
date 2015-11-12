@@ -89,12 +89,12 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\MasterUAB - copia\MasterUAB\Test\Test.cpp" />
     <ClCompile Include="Enemies\BossEnemy.cpp" />
     <ClCompile Include="Enemies\EnemyManager.cpp" />
     <ClCompile Include="Enemies\FixedEnemy.cpp" />
     <ClCompile Include="Enemies\PatrolEnemy.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
