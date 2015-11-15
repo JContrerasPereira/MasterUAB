@@ -9,7 +9,7 @@
 class CInputManagerImplementation : public CInputManager
 {
 public:
-
+	CInputManagerImplementation();
 	void LoadCommandsFromFile(const std::string& path);
 
 	void BeginFrame();

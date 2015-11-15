@@ -4,6 +4,7 @@
 #include "DebugRender.h"
 #include "Application.h"
 #include "InputManagerImplementation.h"
+#include "SphericalCameraController.h"
 
 //#pragma comment(lib,"d3dx11.lib")
 #pragma comment(lib,"d3d11.lib")
@@ -52,12 +53,11 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	DWORD l_CurrentTime = 0;
 	float l_ElapsedTime = 0;
 	float l_PreviousTime = 0;
-	CInputManagerImplementation *l_InputManager = new CInputManagerImplementation();
+	CInputManagerImplementation l_InputManager;
 
+	CInputManager::SetCurrentInputManager(&l_InputManager);
 
-	CInputManager::SetCurrentInputManager(l_InputManager);
-
-	l_InputManager->LoadCommandsFromFile("Data\\input.xml");
+	l_InputManager.LoadCommandsFromFile("Data\\input.xml");
 
 	// Register the window class
 	WNDCLASSEX wc = {	sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
@@ -80,7 +80,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	CDebugRender l_DebugRender(l_context.GetDevice());
 	CSphericalCameraController l_Camera;
 
-	CApplication application(&l_DebugRender, &l_context, &l_Camera);
+	CApplication application(&l_DebugRender, &l_context, l_Camera);
 
 	UpdateWindow( hWnd );
 	MSG msg;
@@ -90,35 +90,34 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
 	while( msg.message != WM_QUIT )
 	{
+		l_CurrentTime = timeGetTime();
 		if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
 		{
 			switch (msg.message)
 			{
-			case WM_SYSKEYDOWN:
-			case WM_SYSKEYUP:
-			case WM_KEYDOWN:
-			case WM_KEYUP:
-				if (!l_InputManager->KeyEventReceived(msg.wParam, msg.lParam))
-				{
+				case WM_SYSKEYDOWN:
+				case WM_SYSKEYUP:
+				case WM_KEYDOWN:
+				case WM_KEYUP:
+					if (!l_InputManager.KeyEventReceived(msg.wParam, msg.lParam))
+					{
+						TranslateMessage(&msg);
+						DispatchMessage(&msg);
+					}
+					break;
+				default:
 					TranslateMessage(&msg);
 					DispatchMessage(&msg);
-				}
-				break;
-			default:
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
 			}
 		}
 		else
 		{
-			l_InputManager->BeginFrame();
-			// Main loop: Añadir aquí el Update y Render de la aplicación principal
-			l_CurrentTime = timeGetTime();
-			l_ElapsedTime = (float)(l_CurrentTime - l_PreviousTime)*0.001f;
+			l_InputManager.BeginFrame();
+			l_ElapsedTime = (float)(l_CurrentTime - l_PreviousTime)*0.1f;
 			l_PreviousTime = l_CurrentTime;
 			application.Update(l_ElapsedTime);
 			application.Render();
-			l_InputManager->EndFrame();
+			l_InputManager.EndFrame();
 		}
 	}
 	UnregisterClass( APPLICATION_NAME, wc.hInstance );

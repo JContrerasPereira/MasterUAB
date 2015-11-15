@@ -8,7 +8,7 @@
 #include "SphericalCameraController.h"
 #include "InputManager.h"
 
-CApplication::CApplication(CDebugRender *_DebugRender, CContextManager *_ContextManager, CSphericalCameraController *_Camera)
+CApplication::CApplication(CDebugRender *_DebugRender, CContextManager *_ContextManager, CSphericalCameraController _Camera)
 	: m_DebugRender(_DebugRender)
 	, m_ContextManager(_ContextManager)
 	, m_WorldRotation(0)
@@ -24,12 +24,6 @@ CApplication::~CApplication()
 
 void CApplication::Update(float _ElapsedTime)
 {
-	m_WorldRotation += .00013f;
-	while (m_WorldRotation > FLOAT_PI_VALUE * 2)
-	{
-		m_WorldRotation -= FLOAT_PI_VALUE * 2;
-	}
-
 	Vect3f cameraMovement(0,0,0);
 
 	if (CInputManager::GetInputManager()->IsActionActive("MOVE_LEFT"))
@@ -49,7 +43,7 @@ void CApplication::Update(float _ElapsedTime)
 		cameraMovement.y -= 0.01f * _ElapsedTime;
 	}
 
-	m_Camera->Update(_ElapsedTime, cameraMovement);
+	m_Camera.Update(_ElapsedTime, cameraMovement);
 
 }
 
@@ -75,7 +69,7 @@ void CApplication::Render()
 	world.SetIdentity();
 	world.RotByAnglesYXZ(m_WorldRotation, 0, 0);
 
-	m_Camera->SetCamera(&camera);
+	m_Camera.SetCamera(&camera);
 
 	/*
 	Mat44f world, view, projection;

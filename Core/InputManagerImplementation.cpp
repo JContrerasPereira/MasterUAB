@@ -3,49 +3,20 @@
 #include "InputManagerImplementation.h"
 
 #include "XML\XMLTreeNode.h"
+#include <assert.h>
+
+CInputManagerImplementation::CInputManagerImplementation()
+{
+	for (int i = 0; i < 256; ++i)
+	{
+		m_KeysCurrent[i] = false;
+	}
+}
 
 void CInputManagerImplementation::LoadCommandsFromFile(const std::string& path)
 {
 	m_Actions.clear();
 
-	/*
-	{
-		Action action = { "MOVE_LEFT", Action::KEYBOARD };
-		action.keyboard.mode = Action::WHILE_PRESSED;
-		action.keyboard.key = 'A';
-		action.keyboard.needsAlt = false;
-		action.keyboard.needsCtrl = false;
-
-		m_Actions.push_back(action);
-	}
-	{
-		Action action = { "MOVE_RIGHT", Action::KEYBOARD };
-		action.keyboard.mode = Action::WHILE_PRESSED;
-		action.keyboard.key = 'D';
-		action.keyboard.needsAlt = false;
-		action.keyboard.needsCtrl = false;
-
-		m_Actions.push_back(action);
-	}
-	{
-		Action action = { "MOVE_UP", Action::KEYBOARD };
-		action.keyboard.mode = Action::WHILE_PRESSED;
-		action.keyboard.key = 'W';
-		action.keyboard.needsAlt = false;
-		action.keyboard.needsCtrl = false;
-
-		m_Actions.push_back(action);
-	}
-	{
-		Action action = { "MOVE_DOWN", Action::KEYBOARD };
-		action.keyboard.mode = Action::WHILE_PRESSED;
-		action.keyboard.key = 'S';
-		action.keyboard.needsAlt = false;
-		action.keyboard.needsCtrl = false;
-
-		m_Actions.push_back(action);
-	}
-	/*/
 	CXMLTreeNode l_XML;
 	if (l_XML.LoadFile(path.c_str()))
 	{
@@ -61,14 +32,14 @@ void CInputManagerImplementation::LoadCommandsFromFile(const std::string& path)
 				action.inputType = ParseInputType(type);
 				switch (action.inputType)
 				{
-				case Action::KEYBOARD:
+					case Action::KEYBOARD:
 
-					action.keyboard.mode = ParseMode(l_Action.GetPszProperty("mode", "ON_PRESS"));
+						action.keyboard.mode = ParseMode(l_Action.GetPszProperty("mode", "ON_PRESS"));
 					
-					action.keyboard.key = l_Action.GetPszProperty("key", "A")[0];
-					action.keyboard.needsAlt = l_Action.GetBoolProperty("needs_alt", false, false);
-					action.keyboard.needsCtrl = l_Action.GetBoolProperty("needs_ctrl", false, false);
-					break;
+						action.keyboard.key = l_Action.GetPszProperty("key", "A")[0];
+						action.keyboard.needsAlt = l_Action.GetBoolProperty("needs_alt", false, false);
+						action.keyboard.needsCtrl = l_Action.GetBoolProperty("needs_ctrl", false, false);
+						break;
 				}
 
 				m_Actions.push_back(action);
@@ -127,63 +98,62 @@ void CInputManagerImplementation::BeginFrame()
 		const Action& action = *it;
 		switch (action.inputType)
 		{
-		case Action::KEYBOARD:
-			switch (action.keyboard.mode)
-			{
-			case Action::ON_PRESS:
-
-				if (m_KeysCurrent[action.keyboard.key] && !m_KeysPrevious[action.keyboard.key])
+			case Action::KEYBOARD:
+				switch (action.keyboard.mode)
 				{
-					if ((!action.keyboard.needsAlt || m_Alt) && (!action.keyboard.needsCtrl || m_Ctrl))
-					{
-						m_ActiveActions.insert(action.name);
-					}
+					case Action::ON_PRESS:
+
+						if (m_KeysCurrent[action.keyboard.key] && !m_KeysPrevious[action.keyboard.key])
+						{
+							if ((!action.keyboard.needsAlt || m_Alt) && (!action.keyboard.needsCtrl || m_Ctrl))
+							{
+								m_ActiveActions.insert(action.name);
+							}
+						}
+
+						break;
+
+					case Action::WHILE_PRESSED:
+
+						if (m_KeysCurrent[action.keyboard.key])
+						{
+							if ((!action.keyboard.needsAlt || m_Alt) && (!action.keyboard.needsCtrl || m_Ctrl))
+							{
+								m_ActiveActions.insert(action.name);
+							}
+						}
+
+						break;
+
+					case Action::ON_RELEASE:
+						
+						if (m_KeysCurrent[action.keyboard.key] && !m_KeysPrevious[action.keyboard.key])
+						{
+							if ((!action.keyboard.needsAlt || m_Alt) && (!action.keyboard.needsCtrl || m_Ctrl))
+							{
+								m_ActiveActions.erase(action.name);
+							}
+						}
+
+						break;
+					case Action::WHILE_RELEASED:
+						
+						if (m_KeysCurrent[action.keyboard.key])
+						{
+							if ((!action.keyboard.needsAlt || m_Alt) && (!action.keyboard.needsCtrl || m_Ctrl))
+							{
+								m_ActiveActions.erase(action.name);
+							}
+						}
+
+						break;
+
+					default:
+						break;
 				}
 				break;
-
-			case Action::WHILE_PRESSED:
-
-				if (m_KeysCurrent[action.keyboard.key])
-				{
-					if ((!action.keyboard.needsAlt || m_Alt) && (!action.keyboard.needsCtrl || m_Ctrl))
-					{
-						m_ActiveActions.insert(action.name);
-					}
-				}
-
-				break;
-
-			case Action::ON_RELEASE:
-				// TODO 2.3: añadir acciones de release
-
-				if (m_KeysCurrent[action.keyboard.key] && !m_KeysPrevious[action.keyboard.key])
-				{
-					if ((!action.keyboard.needsAlt || m_Alt) && (!action.keyboard.needsCtrl || m_Ctrl))
-					{
-						m_ActiveActions.erase(action.name);
-					}
-				}
-
-				break;
-			case Action::WHILE_RELEASED:
-				// TODO 2.3: añadir acciones de botón no pulsado
-
-				if (m_KeysCurrent[action.keyboard.key])
-				{
-					if ((!action.keyboard.needsAlt || m_Alt) && (!action.keyboard.needsCtrl || m_Ctrl))
-					{
-						m_ActiveActions.erase(action.name);
-					}
-				}
-
-				break;
-
 			default:
 				break;
-			}
-			break;
-		default:
-			break;
 		}
 	}
 
@@ -194,6 +164,7 @@ void CInputManagerImplementation::EndFrame()
 	for (int i = 0; i < 256; ++i)
 	{
 		m_KeysPrevious[i] = m_KeysCurrent[i];
+		m_KeysCurrent[i] = false;
 	}
 
 	m_Alt = m_Ctrl = false;
@@ -211,23 +182,23 @@ bool CInputManagerImplementation::KeyEventReceived(unsigned int wParam, unsigned
 		{
 			switch (wParam)
 			{
-			case VK_RETURN:
-				if (m_Alt)
-				{
-					m_ActiveActions.insert("TOGLE_FULLCREEN");
-					return true;
-				}
-				return false;
-			case VK_ESCAPE:
-				PostQuitMessage(0);
-				return true;
-			case VK_F4:
-				if (m_Alt)
-				{
+				case VK_RETURN:
+					if (m_Alt)
+					{
+						m_ActiveActions.insert("TOGLE_FULLCREEN");
+						return true;
+					}
+					return false;
+				case VK_ESCAPE:
 					PostQuitMessage(0);
 					return true;
-				}
-				return false;
+				case VK_F4:
+					if (m_Alt)
+					{
+						PostQuitMessage(0);
+						return true;
+					}
+					return false;
 			}
 		}
 	}
