@@ -1,9 +1,10 @@
 <input>
-	<action name="MOVE_UP" type="KEYBOARD" mode="WHILE_PRESSED" key="W" />
-	<action name="MOVE_LEFT" type="KEYBOARD" mode="WHILE_PRESSED" key="A" />
-	<action name="MOVE_DOWN" type="KEYBOARD" mode="WHILE_PRESSED" key="S" />
-	<action name="MOVE_RIGHT" type="KEYBOARD" mode="WHILE_PRESSED" key="D" />
-	<!--
-		Añadir el resto de acciones
-	-->
+	<action name="MOVE_FWD" type="KEYBOARD" mode="WHILE_PRESSED" key="W" triggers_axis="true" axis="MOVE_FWD" axis_value="1"/>
+	<action name="STRAFE_LEFT" type="KEYBOARD" mode="WHILE_PRESSED" key="A" triggers_axis="true" axis="STRAFE" axis_value="-1"/>
+	<action name="MOVE_BACK" type="KEYBOARD" mode="WHILE_PRESSED" key="S" triggers_axis="true" axis="MOVE_FWD" axis_value="-1"/>
+	<action name="STRAFE_RIGHT" type="KEYBOARD" mode="WHILE_PRESSED" key="D" triggers_axis="true" axis="STRAFE" axis_value="1"/>
+	<action name="MOVE_CAMERA" type="MOUSE" button="RIGHT" mode="WHILE_PRESSED" />
+	<axis name="X_AXIS" type="MOUSE" axis="X" axis_scale="0.05"/>
+	<axis name="Y_AXIS" type="MOUSE" axis="Y" axis_scale="0.01" />
+	<axis name="ZOOM" type="MOUSE" axis="WHEEL" axis_scale="0.05" />
 </input>

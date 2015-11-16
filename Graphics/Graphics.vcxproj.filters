@@ -10,6 +10,7 @@
     <ClInclude Include="RenderableVertexs.h" />
     <ClInclude Include="SphericalCameraController.h" />
     <ClInclude Include="VertexTypes.h" />
+    <ClInclude Include="FPSCameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CameraController.cpp" />
@@ -18,5 +19,6 @@
     <ClCompile Include="dummy.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="SphericalCameraController.cpp" />
+    <ClCompile Include="FPSCameraController.cpp" />
   </ItemGroup>
 </Project>
