@@ -111,6 +111,7 @@ private:
 	InputType ParseInputType(const std::string& inputType);
 	Action::MouseButton ParseMouseButton(const std::string& button);
 	MouseAxis ParseMouseAxis(const std::string& axis);
+	GamepadAxis ParseGamepadAxis(const std::string& axis);
 
 	bool m_KeysCurrent[256], m_KeysPrevious[256];
 	bool m_Alt, m_Ctrl;

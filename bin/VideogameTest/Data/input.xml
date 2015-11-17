@@ -7,4 +7,5 @@
 	<axis name="X_AXIS" type="MOUSE" axis="X" axis_scale="0.05"/>
 	<axis name="Y_AXIS" type="MOUSE" axis="Y" axis_scale="0.01" />
 	<axis name="ZOOM" type="MOUSE" axis="WHEEL" axis_scale="0.05" />
+	<axis name="X_AXIS" type="GAMEPAD" axis="LEFT_X" />
 </input>

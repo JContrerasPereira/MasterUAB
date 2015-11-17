@@ -3,6 +3,8 @@
 #include "SphericalCameraController.h"
 #include "FPSCameraController.h"
 #include "HelperTypes.h"
+#include "RenderManager.h"
+#include "MaterialManager.h"
 
 class CDebugRender;
 class CContextManager;
@@ -15,6 +17,7 @@ public:
 
 	void SwitchCamera();
 
+	void Init();
 	void Update(float _ElapsedTime);
 	void Render();
 
@@ -29,6 +32,9 @@ private:
 	CContextManager *m_ContextManager;
 
 	CColor m_BackgroundColor;
-	SPositionOrientation m_CubeTransform;
+	CRenderableObject m_Cube;
+
+	CRenderManager m_RenderManager;
+	CMaterialManager m_MaterialManager;
 };
 

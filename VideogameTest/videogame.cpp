@@ -125,6 +125,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 		CDebugHelper::SetCurrentDebugHelper(&debugHelper);
 
 		CApplication application(&debugRender, &s_Context);
+		application.Init();
 
 		UpdateWindow(hWnd);
 		MSG msg;

@@ -95,54 +95,6 @@ void CInputManagerImplementation::LoadCommandsFromFile(const std::string& path)
 {
 	m_Actions.clear();
 
-	/*
-	{
-		Action action = { "MOVE_CAMERA", MOUSE, Action::WHILE_PRESSED };
-		action.mouse.button = Action::RIGHT;
-
-		m_Actions.push_back(action);
-	}
-
-
-	{
-		Axis axis = { "X_AXIS", MOUSE };
-		axis.mouse.axis = MouseAxis::X;
-		axis.mouse.scale = 0.05f;
-
-		m_Axis.push_back(axis);
-	}
-	{
-		Axis axis = { "Y_AXIS", MOUSE };
-		axis.mouse.axis = MouseAxis::Y;
-		axis.mouse.scale = 0.01f;
-
-		m_Axis.push_back(axis);
-	}
-	{
-		Axis axis = { "ZOOM", MOUSE };
-		axis.mouse.axis = MouseAxis::WHEEL;
-		axis.mouse.scale = 0.05f;
-
-		m_Axis.push_back(axis);
-	}
-
-
-	{
-		Axis axis = { "X_AXIS", GAMEPAD };
-		axis.gamepad.axis = GamepadAxis::LEFT_X;
-		axis.gamepad.gamepadNumber = 0;
-
-		m_Axis.push_back(axis);
-	}
-	{
-		Axis axis = { "Y_AXIS", GAMEPAD };
-		axis.gamepad.axis = GamepadAxis::LEFT_Y;
-		axis.gamepad.gamepadNumber = 0;
-
-		m_Axis.push_back(axis);
-	}
-
-	/*/
 	CXMLTreeNode l_XML;
 	if (l_XML.LoadFile(path.c_str()))
 	{
@@ -181,8 +133,6 @@ void CInputManagerImplementation::LoadCommandsFromFile(const std::string& path)
 						std::string button = l_Action.GetPszProperty("button", "RIGHT");
 						action.mouse.button = ParseMouseButton(button);
 						break;
-						// TODO: Mouse y Gamepad
-
 						// Pista: para parsear botones del gamepad, usad las constantes:
 						//   podeis tener más de una a la vez usando "XINPUT_GAMEPAD_A | XINPUT_GAMEPAD_B", por ejemplo.
 						//   pero para que eso funcione bién con ON_PRESS tendréis que mejorar la lógica de esta clase o ser frame perfect pulsando botones
@@ -200,8 +150,7 @@ void CInputManagerImplementation::LoadCommandsFromFile(const std::string& path)
 						//  XINPUT_GAMEPAD_A             
 						//  XINPUT_GAMEPAD_B             
 						//  XINPUT_GAMEPAD_X             
-						//  XINPUT_GAMEPAD_Y             
-						// 
+						//  XINPUT_GAMEPAD_Y
 					}
 
 					m_Actions.push_back(action);
@@ -223,6 +172,8 @@ void CInputManagerImplementation::LoadCommandsFromFile(const std::string& path)
 						axis.mouse.scale = l_Action.GetFloatProperty("axis_scale");
 						break;
 					case GAMEPAD:
+						axis.gamepad.axis = ParseGamepadAxis(axis_str);
+						axis.gamepad.gamepadNumber = l_Action.GetIntProperty("gamepad_button");
 						break;
 					}
 
@@ -254,6 +205,38 @@ CInputManagerImplementation::MouseAxis CInputManagerImplementation::ParseMouseAx
 	else
 	{
 		return (MouseAxis) - 1;
+	}
+}
+
+CInputManagerImplementation::GamepadAxis CInputManagerImplementation::ParseGamepadAxis(const std::string& axis)
+{
+	if (axis == "LEFT_X")
+	{
+		return GamepadAxis::LEFT_X;
+	}
+	else if (axis == "LEFT_Y")
+	{
+		return GamepadAxis::LEFT_Y;
+	}
+	else if (axis == "LEFT_TRIGGER")
+	{
+		return GamepadAxis::LEFT_TRIGGER;
+	}
+	else if (axis == "RIGHT_TRIGGER")
+	{
+		return GamepadAxis::RIGHT_TRIGGER;
+	}
+	else if (axis == "RIGHT_X")
+	{
+		return GamepadAxis::RIGHT_X;
+	}
+	else if (axis == "RIGHT_Y")
+	{
+		return GamepadAxis::RIGHT_Y;
+	}
+	else
+	{
+		return (GamepadAxis) - 1;
 	}
 }
 
