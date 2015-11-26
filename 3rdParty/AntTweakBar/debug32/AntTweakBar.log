@@ -1,9 +1,6 @@
-﻿Compilación iniciada a las 17/11/2015 21:13:46.
-     1>Proyecto "D:\MasterUAB\3rdParty\AntTweakBar\AntTweakBar.vcxproj" en el nodo 3 (build destinos).
-       El archivo del proyecto contiene ToolsVersion="10.0". Este conjunto de herramientas puede faltar o ser desconocido, en cuyo caso es posible que pueda resolver este problema instalando la versión apropiada de MSBuild, o puede haberse obligado a la compilación a utilizar un valor de ToolsVersion concreto por motivos de directivas. Se tratará el proyecto como si contuviera ToolsVersion="4.0". Para obtener más información, vea http://go.microsoft.com/fwlink/?LinkId=291333.
-     1>InitializeBuildStatus:
-         Se creará "debug32\AntTweakBar.unsuccessfulbuild" porque se especificó "AlwaysCreate".
-       PreBuildEvent:
+﻿Compilación iniciada a las 2015-11-22 18:10:51.
+     1>Proyecto "C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\AntTweakBar.vcxproj" en el nodo 3 (Build destinos).
+     1>PreBuildEvent:
          fxc /Od /Zi /T vs_4_0_level_9_1 /E LineRectVS /Fh debug32\TwDirect3D11_LineRectVS.h TwDirect3D11.hlsl
          fxc /Od /Zi /T vs_4_0_level_9_1 /E LineRectCstColorVS /Fh debug32\TwDirect3D11_LineRectCstColorVS.h TwDirect3D11.hlsl
          fxc /Od /Zi /T ps_4_0_level_9_1 /E LineRectPS /Fh debug32\TwDirect3D11_LineRectPS.h TwDirect3D11.hlsl
@@ -15,40 +12,32 @@
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see D:\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectVS.h
+         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectVS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see D:\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectCstColorVS.h
+         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectCstColorVS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see D:\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectPS.h
+         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectPS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see D:\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextVS.h
+         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextVS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see D:\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextCstColorVS.h
+         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextCstColorVS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see D:\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextPS.h
+         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextPS.h
        ClCompile:
-         Todas las salidas están actualizadas.
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ID:\MasterUAB\3rdParty\AntTweakBar\include /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D TW_EXPORTS /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"TwPrecomp.h" /Fp"debug32\AntTweakBar.pch" /Fo"debug32\\" /Fd"debug32\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt TwDirect3D11.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\include" /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D TW_EXPORTS /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"TwPrecomp.h" /Fp"debug32\AntTweakBar.pch" /Fo"debug32\\" /Fd"debug32\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt TwDirect3D11.cpp
          TwDirect3D11.cpp
-         Todas las salidas están actualizadas.
-         Todas las salidas están actualizadas.
-       ResourceCompile:
-         Todas las salidas están actualizadas.
-       ManifestResourceCompile:
-         Todas las salidas están actualizadas.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\MasterUAB\\bin\lib\AntTweakBar_d.dll" /INCREMENTAL /NOLOGO /LIBPATH:D:\MasterUAB\3rdParty\AntTweakBar\include kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"debug32\AntTweakBar_d.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\MasterUAB\\bin\lib\AntTweakBar_d.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"D:\MasterUAB\\bin\lib\AntTweakBar_d.lib" /MACHINE:X86 /DLL debug32\AntTweakBar.res
-         debug32\AntTweakBar_d.dll.embed.manifest.res
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jose Contreras\git\MasterUAB\\bin\lib\AntTweakBarDebug.dll" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\include" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Jose Contreras\git\MasterUAB\\bin\lib\AntTweakBarDebug.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"C:\Users\Jose Contreras\git\MasterUAB\\bin\lib\AntTweakBarDebug.lib" /MACHINE:X86 /SAFESEH /DLL debug32\AntTweakBar.res
          debug32\LoadOGL.obj
          debug32\LoadOGLCore.obj
          debug32\TwBar.obj
@@ -68,20 +57,12 @@
          debug32\TwOpenGL.obj
          debug32\TwOpenGLCore.obj
          debug32\TwPrecomp.obj
-       Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"debug32\AntTweakBar_d.dll.embed.manifest" /manifest debug32\AntTweakBar_d.dll.intermediate.manifest
-         Todas las salidas están actualizadas.
-       LinkEmbedManifest:
-         Todas las salidas están actualizadas.
-         AntTweakBar.vcxproj -> D:\MasterUAB\\bin\lib\AntTweakBar_d.dll
+         AntTweakBar.vcxproj -> C:\Users\Jose Contreras\git\MasterUAB\\bin\lib\AntTweakBarDebug.dll
        PostBuildEvent:
          if exist ..\examples\debug32  xcopy /y /f ..\lib\debug\AntTweakBar.dll ..\examples\debug32\.
          :VCEnd
-       FinalizeBuildStatus:
-         Se eliminará el archivo "debug32\AntTweakBar.unsuccessfulbuild".
-         Aplicando tarea Touch a "debug32\AntTweakBar.lastbuildstate".
-     1>Compilación del proyecto terminada "D:\MasterUAB\3rdParty\AntTweakBar\AntTweakBar.vcxproj" (build destinos).
+     1>Compilación del proyecto terminada "C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\AntTweakBar.vcxproj" (Build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:01.22
+Tiempo transcurrido 00:00:01.79

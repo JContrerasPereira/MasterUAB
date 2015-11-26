@@ -1,6 +1,9 @@
 #include <Windows.h>
 #include <Windowsx.h>
 
+#include "Utils\Named.h"
+#include "Utils\TemplateVectorMapManager.h"
+
 #include <d3d11.h>
 
 #include <cassert>
