@@ -1,3 +1,6 @@
+#ifndef TEMPLATED_VECTOR_MAP_MANAGER_H
+#define TEMPLATED_VECTOR_MAP_MANAGER_H
+
 #include <map>
 #include <string>
 #include <vector>
@@ -121,3 +124,5 @@ public:
 		return m_ResourcesVector;
 	}
 };
+
+#endif

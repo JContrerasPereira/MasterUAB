@@ -51,29 +51,11 @@ void CEffectManager::Load(const std::string &Filename)
 
 CEffectVertexShader * CEffectManager::GetVertexShader(const std::string &VertexShader)
 {
-	TMapResource::iterator it = m_Resources.find(VertexShader);
-
-	if (it != m_Resources.end())
-	{
-		return it->second->GetVertexShader();
-	}
-	else
-	{
-		return NULL;
-	}
+	return m_VertexShaders.GetResource(VertexShader);
 }
 
 
 CEffectPixelShader * CEffectManager::GetPixelShader(const std::string &PixelShader)
 {
-	TMapResource::iterator it = m_Resources.find(PixelShader);
-
-	if (it != m_Resources.end())
-	{
-		return it->second->GetPixelShader();
-	}
-	else
-	{
-		return NULL;
-	}
+	return m_PixelShaders.GetResource(PixelShader);
 }

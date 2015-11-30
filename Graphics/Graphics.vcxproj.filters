@@ -32,12 +32,6 @@
     <ClInclude Include="Material\MaterialManager.h">
       <Filter>Material</Filter>
     </ClInclude>
-    <ClInclude Include="RenderableObject\RenderableVertexs.h">
-      <Filter>RenderableObject</Filter>
-    </ClInclude>
-    <ClInclude Include="TemplatedRenderableIndexedVertexs.h">
-      <Filter>RenderableObject</Filter>
-    </ClInclude>
     <ClInclude Include="Effect\Effect.h">
       <Filter>Effect</Filter>
     </ClInclude>
@@ -59,16 +53,25 @@
     <ClInclude Include="Effect\EffectPixelShader.h">
       <Filter>Effect</Filter>
     </ClInclude>
-    <ClInclude Include="RenderableObject\RenderableObjectsManager.h">
+    <ClInclude Include="ColoredVertex.h" />
+    <ClInclude Include="TemplatedRenderableIndexedVertexs.h" />
+    <ClInclude Include="RenderableObject\RenderableVertexs.h" />
+    <ClInclude Include="Mesh\InstanceMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\StaticMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\StaticMeshManager.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableObject\C3DElement.h">
       <Filter>RenderableObject</Filter>
     </ClInclude>
     <ClInclude Include="RenderableObject\RenderableObject.h">
       <Filter>RenderableObject</Filter>
     </ClInclude>
-    <ClInclude Include="ColoredVertex.h" />
-    <ClInclude Include="C3DElement.h" />
-    <ClInclude Include="StaticMesh.h" />
-    <ClInclude Include="RenderableObject\InstanceMesh.h">
+    <ClInclude Include="RenderableObject\RenderableObjectsManager.h">
       <Filter>RenderableObject</Filter>
     </ClInclude>
   </ItemGroup>
@@ -115,12 +118,19 @@
     <ClCompile Include="Effect\EffectPixelShader.cpp">
       <Filter>Effect</Filter>
     </ClCompile>
-    <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp">
+    <ClCompile Include="Mesh\InstanceMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\StaticMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh\StaticMeshManager.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject\C3DElement.cpp">
       <Filter>RenderableObject</Filter>
     </ClCompile>
-    <ClCompile Include="C3DElement.cpp" />
-    <ClCompile Include="StaticMesh.cpp" />
-    <ClCompile Include="RenderableObject\InstanceMesh.cpp">
+    <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp">
       <Filter>RenderableObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -139,6 +149,9 @@
     </Filter>
     <Filter Include="RenderableObject">
       <UniqueIdentifier>{59a3da49-abec-487c-ac30-16e626e4258a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh">
+      <UniqueIdentifier>{d615788f-693a-4697-953e-bf85f6d7326a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

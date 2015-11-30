@@ -7,7 +7,7 @@
 class CRenderableObject : public C3DElement, public CNamed
 {
 public:
-	CRenderableObject();
+	CRenderableObject() : CNamed() {}
 	virtual ~CRenderableObject() {}
 	virtual void Update(float ElapsedTime) {}
 	virtual void Render(CRenderManager *RM) = 0;

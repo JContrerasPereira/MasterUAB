@@ -1,11 +1,12 @@
 #include "EffectVertexShader.h"
 #include "Engine.h"
-#include "ColoredVertex.h"
+#include "VertexTypes.h"
 
 
 CEffectVertexShader::CEffectVertexShader(const CXMLTreeNode &TreeNode) : CEffectShader(TreeNode)
 {
 	m_VertexType = TreeNode.GetPszProperty("vertex_type");
+	Load();
 }
 
 
@@ -29,7 +30,7 @@ bool CEffectVertexShader::Load()
 		return false;
 	}
 	if (m_VertexType == "MV_POSITION_NORMAL_TEXTURE_VERTEX")
-		l_Loaded = TCOLORED_VERTEX::CreateInputLayout(l_RenderManager, l_VSBlob, &m_VertexLayout);
+		l_Loaded = TTEXTURE_VERTEX::CreateInputLayout(l_RenderManager, l_VSBlob, &m_VertexLayout);
 	else if (m_VertexType == "MV_POSITION_COLOR_VERTEX")
 		l_Loaded = TCOLORED_VERTEX::CreateInputLayout(l_RenderManager, l_VSBlob, &m_VertexLayout);
 	else

@@ -1,5 +1,5 @@
 #include "RenderableObjectsManager.h"
-#include "InstanceMesh.h"
+#include "Mesh\InstanceMesh.h"
 
 CRenderableObjectsManager::CRenderableObjectsManager()
 {
@@ -37,7 +37,7 @@ CRenderableObject * CRenderableObjectsManager::AddMeshInstance(CXMLTreeNode &Tre
 	std::string InstanceName = TreeNode.GetPszProperty("name");
 	Vect3f Default(0.0f, 0.0f, 0.0f);
 	Vect3f Position = TreeNode.GetVect3fProperty("pos", Default, false);
-
+	
 	return AddMeshInstance(CoreName, InstanceName, Position);
 }
 

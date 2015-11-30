@@ -5,7 +5,7 @@
 #include "Math\Vector3.h"
 #include "Math\Vector4.h"
 #include "Math\Color.h"
-
+#include "RenderManager.h"
 #include <d3d11.h>
 
 #define MV_VERTEX_TYPE_POSITION				0x01
@@ -124,3 +124,52 @@ CREATE_MVD3D11_VERTEX(MV_POSITION4_COLOR_TEXTURE_VERTEX, 0, 1, 0, 0, 1, 1, 0);
 CREATE_MVD3D11_VERTEX(MV_POSITION_COLOR_VERTEX, 1, 0, 0, 0, 1, 0, 0);
 CREATE_MVD3D11_VERTEX(MV_POSITION_TEXTURE_VERTEX, 1, 0, 0, 0, 0, 1, 0);
 CREATE_MVD3D11_VERTEX(MV_POSITION_COLOR_TEXTURE_VERTEX, 1, 0, 0, 0, 1, 1, 0);
+
+
+struct TCOLORED_VERTEX
+{
+	Vect3f x, y, z;
+	CColor color;
+	static bool CreateInputLayout(CRenderManager *RenderManager, ID3DBlob *VSBlob, ID3D11InputLayout **VertexLayout)
+	{
+		D3D11_INPUT_ELEMENT_DESC l_Layout[] =
+		{
+			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+
+			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		};
+		UINT l_NumElements = ARRAYSIZE(l_Layout);
+		HRESULT l_HR = RenderManager->GetDevice()->CreateInputLayout(l_Layout, l_NumElements, VSBlob->GetBufferPointer(), VSBlob->GetBufferSize(), VertexLayout);
+
+		return !FAILED(l_HR);
+	}
+	static unsigned int GetVertexType()
+	{
+		return MV_VERTEX_TYPE_POSITION | MV_VERTEX_TYPE_COLOR;
+	}
+};
+
+struct TTEXTURE_VERTEX
+{
+	Vect3f x, y, z;
+	Vect2f u, v;
+	Vect3f n1, n2, n3;
+
+	static bool CreateInputLayout(CRenderManager *RenderManager, ID3DBlob *VSBlob, ID3D11InputLayout **VertexLayout)
+	{
+			D3D11_INPUT_ELEMENT_DESC l_Layout[] =
+			{
+				{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+				{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+				{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			};
+			UINT l_NumElements = ARRAYSIZE(l_Layout);
+			HRESULT l_HR = RenderManager->GetDevice()->CreateInputLayout(l_Layout, l_NumElements, VSBlob->GetBufferPointer(), VSBlob->GetBufferSize(), VertexLayout);
+
+			return !FAILED(l_HR);
+		}
+	static unsigned int GetVertexType()
+	{
+		return MV_VERTEX_TYPE_POSITION | MV_VERTEX_TYPE_NORMAL | MV_VERTEX_TYPE_TEXTURE1;
+	}
+};

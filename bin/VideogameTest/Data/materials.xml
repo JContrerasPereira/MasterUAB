@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <materials>
-	<material name="Material1" effect_technique="diffuse_technique">
-		<texture filename="data/textures/bark.dds"/>
-	</material>
-	<material name="Material2" effect_technique="diffuse_technique">
-		<texture filename="data/textures/bark.dds"/>
+	<material name="01 - Default" effect_technique="diffuse_technique" >
+		 <texture filename="C:\Program Files\Autodesk\3ds Max 2015\maps\bark.dds"/>
 	</material>
 </materials>

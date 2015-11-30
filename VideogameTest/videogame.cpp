@@ -23,6 +23,9 @@
 
 #include "Engine.h"
 #include "Material\MaterialManager.h"
+#include "RenderableObject\RenderableObjectsManager.h"
+
+#include "VertexTypes.h"
 
 #pragma comment(lib, "Graphics_d.lib")
 #pragma comment(lib, "Winmm.lib")
@@ -96,8 +99,10 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	CRenderManager * l_RenderManager = new CRenderManager();
 	CContextManager * l_ContextManager = new CContextManager();
 	CEffectManager * l_EffectManager = new CEffectManager();
+	CRenderableObjectsManager * l_RenderableObjectsManager = new CRenderableObjectsManager();
+	CStaticMeshManager * l_StaticMeshManager = new CStaticMeshManager();
 
-	CEngine * Engine = new CEngine(l_MaterialManager, l_RenderManager, l_ContextManager, l_EffectManager);
+	CEngine * Engine = new CEngine(l_MaterialManager, l_RenderManager, l_ContextManager, l_EffectManager, l_RenderableObjectsManager, l_StaticMeshManager);
 
 	// Register the window class
 	WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
@@ -125,16 +130,23 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	l_RenderManager->SetDevice(l_ContextManager->GetDevice());
 	l_RenderManager->SetDeviceContext(l_ContextManager->GetDeviceContext());
 
-	std::string path = "Data\\materials.xml";
+	std::string path = "Data\\effects.xml";
+
+	CEngine::GetSingletonPtr()->GetEffectManager()->Load(path);
+
+	path = "Data\\renderable_objects.xml";
+
+	CEngine::GetSingletonPtr()->GetRenderableObjectsManager()->Load(path);
+
+	path = "Data\\static_meshes.xml";
+
+	CEngine::GetSingletonPtr()->GetStaticMeshManager()->Load(path);
+
+	path = "Data\\materials.xml";
 
 	l_MaterialManager->Load(path);
 
-	CMaterial * l_Material = CEngine::GetSingletonPtr()->GetMaterialManager()->GetResource("Material1");
-	l_Material = l_MaterialManager->GetResource("Material2");
-
-	path = "Data\\effects.xml";
-
-	CEngine::GetSingletonPtr()->GetEffectManager()->Load(path);
+	CMaterial * l_Material = CEngine::GetSingletonPtr()->GetMaterialManager()->GetResource("01 - Default");
 
 	UpdateWindow(hWnd);
 	MSG msg;

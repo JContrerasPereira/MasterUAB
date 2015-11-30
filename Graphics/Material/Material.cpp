@@ -1,9 +1,11 @@
 #include "Material.h"
 #include "Effect\EffectTechnique.h"
+#include "Engine.h"
 
 CMaterial::CMaterial(CXMLTreeNode &TreeNode) : CNamed(TreeNode)
 {
 	std::string l_EffectTechnique = TreeNode.GetPszProperty("effect_technique");
+	m_EffectTechnique = CEngine::GetSingletonPtr()->GetEffectManager()->GetResource(l_EffectTechnique);
 
 	if (l_EffectTechnique == "diffuse_technique")
 	{

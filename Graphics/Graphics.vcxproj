@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C3DElement.h" />
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraController.h" />
     <ClInclude Include="Camera\FPSCameraController.h" />
@@ -27,10 +26,12 @@
     <ClInclude Include="Effect\EffectTechnique.h" />
     <ClInclude Include="Effect\EffectVertexShader.h" />
     <ClInclude Include="ColoredVertex.h" />
-    <ClInclude Include="RenderableObject\InstanceMesh.h" />
+    <ClInclude Include="Mesh\InstanceMesh.h" />
+    <ClInclude Include="Mesh\StaticMesh.h" />
+    <ClInclude Include="Mesh\StaticMeshManager.h" />
+    <ClInclude Include="RenderableObject\C3DElement.h" />
     <ClInclude Include="RenderableObject\RenderableObject.h" />
     <ClInclude Include="RenderableObject\RenderableObjectsManager.h" />
-    <ClInclude Include="StaticMesh.h" />
     <ClInclude Include="TemplatedRenderableIndexedVertexs.h" />
     <ClInclude Include="Material\Material.h" />
     <ClInclude Include="Material\MaterialManager.h" />
@@ -41,7 +42,6 @@
     <ClInclude Include="VertexTypes.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C3DElement.cpp" />
     <ClCompile Include="Camera\CameraController.cpp" />
     <ClCompile Include="Camera\FPSCameraController.cpp" />
     <ClCompile Include="Camera\Frustum.cpp" />
@@ -55,10 +55,12 @@
     <ClCompile Include="Effect\EffectVertexShader.cpp" />
     <ClCompile Include="Material\Material.cpp" />
     <ClCompile Include="Material\MaterialManager.cpp" />
-    <ClCompile Include="RenderableObject\InstanceMesh.cpp" />
+    <ClCompile Include="Mesh\InstanceMesh.cpp" />
+    <ClCompile Include="Mesh\StaticMesh.cpp" />
+    <ClCompile Include="Mesh\StaticMeshManager.cpp" />
+    <ClCompile Include="RenderableObject\C3DElement.cpp" />
     <ClCompile Include="RenderableObject\RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
-    <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="Texture\Texture.cpp" />
     <ClCompile Include="Texture\TextureManager.cpp" />
   </ItemGroup>
