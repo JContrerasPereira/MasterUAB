@@ -5,6 +5,7 @@
     <ClCompile Include="DebugHelperImplementation.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InputManagerImplementation.cpp" />
+    <ClCompile Include="Engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugHelper.h" />

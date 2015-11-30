@@ -1,5 +1,5 @@
-﻿Compilación iniciada a las 2015-11-22 18:10:51.
-     1>Proyecto "C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\AntTweakBar.vcxproj" en el nodo 3 (Build destinos).
+﻿Compilación iniciada a las 29/11/2015 2:10:57.
+     1>Proyecto "C:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\AntTweakBar.vcxproj" en el nodo 5 (Rebuild destinos).
      1>PreBuildEvent:
          fxc /Od /Zi /T vs_4_0_level_9_1 /E LineRectVS /Fh debug32\TwDirect3D11_LineRectVS.h TwDirect3D11.hlsl
          fxc /Od /Zi /T vs_4_0_level_9_1 /E LineRectCstColorVS /Fh debug32\TwDirect3D11_LineRectCstColorVS.h TwDirect3D11.hlsl
@@ -12,32 +12,58 @@
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectVS.h
+         compilation succeeded; see C:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectVS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectCstColorVS.h
+         compilation succeeded; see C:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectCstColorVS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectPS.h
+         compilation succeeded; see C:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_LineRectPS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextVS.h
+         compilation succeeded; see C:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextVS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextCstColorVS.h
+         compilation succeeded; see C:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextCstColorVS.h
          Microsoft (R) Direct3D Shader Compiler 9.29.952.3111
          Copyright (C) Microsoft Corporation 2002-2009. All rights reserved.
          
-         compilation succeeded; see C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextPS.h
+         compilation succeeded; see C:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\debug32\TwDirect3D11_TextPS.h
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\include" /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D TW_EXPORTS /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"TwPrecomp.h" /Fp"debug32\AntTweakBar.pch" /Fo"debug32\\" /Fd"debug32\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt TwDirect3D11.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\include /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D TW_EXPORTS /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"TwPrecomp.h" /Fp"debug32\AntTweakBar.pch" /Fo"debug32\\" /Fd"debug32\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt TwPrecomp.cpp
+         TwPrecomp.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\include /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D TW_EXPORTS /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"TwPrecomp.h" /Fp"debug32\AntTweakBar.pch" /Fo"debug32\\" /Fd"debug32\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt LoadOGL.cpp LoadOGLCore.cpp TwBar.cpp TwColors.cpp TwDirect3D10.cpp TwDirect3D11.cpp TwDirect3D9.cpp TwFonts.cpp TwMgr.cpp TwOpenGL.cpp
+         LoadOGL.cpp
+         LoadOGLCore.cpp
+         TwBar.cpp
+         TwColors.cpp
+         TwDirect3D10.cpp
          TwDirect3D11.cpp
+         TwDirect3D9.cpp
+         TwFonts.cpp
+         TwMgr.cpp
+         TwOpenGL.cpp
+         Generando código...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\include /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D TW_EXPORTS /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"debug32\\" /Fd"debug32\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt TwEventGLFW.c TwEventGLUT.c TwEventSDL.c TwEventSDL12.c TwEventSDL13.c TwEventWin.c
+         TwEventGLFW.c
+         TwEventGLUT.c
+         TwEventSDL.c
+         TwEventSDL12.c
+         TwEventSDL13.c
+         TwEventWin.c
+         Generando código...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\include /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D TW_EXPORTS /D _VC80_UPGRADE=0x0700 /D _WINDLL /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"debug32\\" /Fd"debug32\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt TwEventSFML.cpp TwOpenGLCore.cpp
+         TwEventSFML.cpp
+         TwOpenGLCore.cpp
+         Generando código...
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D _DEBUG /D _VC80_UPGRADE=0x0700 /l"0x0409" /Ires /nologo /fo"debug32\AntTweakBar.res" AntTweakBar.rc 
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jose Contreras\git\MasterUAB\\bin\lib\AntTweakBarDebug.dll" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\include" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Jose Contreras\git\MasterUAB\\bin\lib\AntTweakBarDebug.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"C:\Users\Jose Contreras\git\MasterUAB\\bin\lib\AntTweakBarDebug.lib" /MACHINE:X86 /SAFESEH /DLL debug32\AntTweakBar.res
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Jose\Documents\MasterUAB\\bin\lib\AntTweakBarDebug.dll" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\include kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Jose\Documents\MasterUAB\\bin\lib\AntTweakBarDebug.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"C:\Users\Jose\Documents\MasterUAB\\bin\lib\AntTweakBarDebug.lib" /MACHINE:X86 /SAFESEH /DLL debug32\AntTweakBar.res
          debug32\LoadOGL.obj
          debug32\LoadOGLCore.obj
          debug32\TwBar.obj
@@ -57,12 +83,14 @@
          debug32\TwOpenGL.obj
          debug32\TwOpenGLCore.obj
          debug32\TwPrecomp.obj
-         AntTweakBar.vcxproj -> C:\Users\Jose Contreras\git\MasterUAB\\bin\lib\AntTweakBarDebug.dll
+     1>LoadOGL.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/SAFESEH'
+            Creando biblioteca C:\Users\Jose\Documents\MasterUAB\\bin\lib\AntTweakBarDebug.lib y objeto C:\Users\Jose\Documents\MasterUAB\\bin\lib\AntTweakBarDebug.exp
+         AntTweakBar.vcxproj -> C:\Users\Jose\Documents\MasterUAB\\bin\lib\AntTweakBarDebug.dll
        PostBuildEvent:
          if exist ..\examples\debug32  xcopy /y /f ..\lib\debug\AntTweakBar.dll ..\examples\debug32\.
          :VCEnd
-     1>Compilación del proyecto terminada "C:\Users\Jose Contreras\git\MasterUAB\3rdParty\AntTweakBar\AntTweakBar.vcxproj" (Build destinos).
+     1>Compilación del proyecto terminada "C:\Users\Jose\Documents\MasterUAB\3rdParty\AntTweakBar\AntTweakBar.vcxproj" (Rebuild destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:01.79
+Tiempo transcurrido 00:00:10.05

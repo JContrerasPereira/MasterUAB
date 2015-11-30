@@ -1,8 +1,8 @@
 #include "ContextManager.h"
 
 #include "VertexTypes.h"
-#include "RenderableVertexs.h"
-#include "Effect.h"
+#include "RenderableObject\RenderableVertexs.h"
+#include "Effect\Effect.h"
 
 #include "Math\Matrix44.h"
 
@@ -458,9 +458,9 @@ void CContextManager::Draw(const CRenderableVertexs* _VerticesToRender, ERasteri
 	s_DebugEffect->UpdateParameters(m_DeviceContext, &m_Parameters);
 	s_DebugEffect->SetActive(m_DeviceContext);
 
-	_VerticesToRender->SetBuffers(m_DeviceContext);
+	//_VerticesToRender->SetBuffers(m_DeviceContext);
 
-	_VerticesToRender->Draw(m_DeviceContext);
+	//_VerticesToRender->Draw(m_DeviceContext);
 }
 
 void CContextManager::BeginRender(CColor backgroundColor)

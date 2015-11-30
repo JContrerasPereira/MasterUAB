@@ -1,17 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <materials>
-	<material 
-			name="solid material" 
-			rasterizer_state="SOLID"
-			depth_stencil_state="DEPTH_ON"
-			blend_state="SOLID"/>
-	<material 
-			name="classic blend" 
-			rasterizer_state="SOLID"
-			depth_stencil_state="DEPTH_ON"
-			blend_state="CLASSIC"/>
-	<material 
-			name="premult blend" 
-			rasterizer_state="SOLID"
-			depth_stencil_state="DEPTH_ON"
-			blend_state="PREMULT"/>
+	<material name="Material1" effect_technique="diffuse_technique">
+		<texture filename="data/textures/bark.dds"/>
+	</material>
+	<material name="Material2" effect_technique="diffuse_technique">
+		<texture filename="data/textures/bark.dds"/>
+	</material>
 </materials>

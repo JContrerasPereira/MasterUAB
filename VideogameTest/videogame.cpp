@@ -13,22 +13,21 @@
 #include "Math\Matrix44.h"
 #include "Math\Vector4.h"
 
-#include "Application.h"
-
 #include "InputManagerImplementation.h"
 #include "DebugHelperImplementation.h"
 
 #include "ContextManager.h"
 #include "DebugRender.h"
-#include "Effect.h"
-#include "Camera.h"
+#include "Effect\EffectManager.h"
+#include "Camera\Camera.h"
+
+#include "Engine.h"
+#include "Material\MaterialManager.h"
 
 #pragma comment(lib, "Graphics_d.lib")
 #pragma comment(lib, "Winmm.lib")
 
 #define APPLICATION_NAME	"VIDEOGAME"
-
-CContextManager s_Context;
 
 void ToggleFullscreen(HWND Window, WINDOWPLACEMENT &WindowPosition)
 {
@@ -73,7 +72,7 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		if (wParam != SIZE_MINIMIZED)
 		{
 			TwWindowSize(0, 0);
-			s_Context.Resize(hWnd, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
+			CEngine::GetSingletonPtr()->GetContextManager()->Resize(hWnd, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
 			TwWindowSize((UINT)LOWORD(lParam), (UINT)HIWORD(lParam));
 		}
 		return 0;
@@ -93,6 +92,13 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 //-----------------------------------------------------------------------
 int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow)
 {
+	CMaterialManager * l_MaterialManager = new CMaterialManager();
+	CRenderManager * l_RenderManager = new CRenderManager();
+	CContextManager * l_ContextManager = new CContextManager();
+	CEffectManager * l_EffectManager = new CEffectManager();
+
+	CEngine * Engine = new CEngine(l_MaterialManager, l_RenderManager, l_ContextManager, l_EffectManager);
+
 	// Register the window class
 	WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, APPLICATION_NAME, NULL };
 
@@ -110,11 +116,143 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
 	// Añadir aquí el Init de la applicacioón
 
-	s_Context.CreateContext(hWnd, 800, 600);
+	l_ContextManager->CreateContext(hWnd, 800, 600);
 
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 
-	s_Context.CreateBackBuffer(hWnd, 800, 600);
+	l_ContextManager->CreateBackBuffer(hWnd, 800, 600);
+
+	l_RenderManager->SetDevice(l_ContextManager->GetDevice());
+	l_RenderManager->SetDeviceContext(l_ContextManager->GetDeviceContext());
+
+	std::string path = "Data\\materials.xml";
+
+	l_MaterialManager->Load(path);
+
+	CMaterial * l_Material = CEngine::GetSingletonPtr()->GetMaterialManager()->GetResource("Material1");
+	l_Material = l_MaterialManager->GetResource("Material2");
+
+	path = "Data\\effects.xml";
+
+	CEngine::GetSingletonPtr()->GetEffectManager()->Load(path);
+
+	UpdateWindow(hWnd);
+	MSG msg;
+	ZeroMemory(&msg, sizeof(msg));
+
+	// Añadir en el while la condición de salida del programa de la aplicación
+	DWORD m_PreviousTime = timeGetTime();
+
+	//bool hasFocus = true;
+
+	while (msg.message != WM_QUIT)
+	{
+		if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+		{
+			//if (!debugHelper.Update(msg.hwnd, msg.message, msg.wParam, msg.lParam))
+			{
+				//bool WasDown = false, IsDown = false, Alt = false;
+
+				switch (msg.message)
+				{
+				case WM_SETFOCUS:
+					//hasFocus = true;
+					//inputManager.SetFocus(true);
+					break;
+				case  WM_KILLFOCUS:
+					//hasFocus = false;
+					//inputManager.SetFocus(false);
+					break;
+				case WM_SYSKEYDOWN:
+				case WM_SYSKEYUP:
+				case WM_KEYDOWN:
+				case WM_KEYUP:
+					//WasDown = ((msg.lParam & (1 << 30)) != 0);
+					//IsDown = ((msg.lParam & (1 << 31)) == 0);
+					//Alt = ((msg.lParam & (1 << 29)) != 0);
+					/*
+					if (WasDown != IsDown)
+					{
+						if (IsDown)
+						{
+							bool consumed = false;
+							switch (msg.wParam)
+							{
+							case VK_RETURN:
+								if (Alt)
+								{
+									WINDOWPLACEMENT windowPosition = { sizeof(WINDOWPLACEMENT) };
+									GetWindowPlacement(msg.hwnd, &windowPosition);
+
+									ToggleFullscreen(msg.hwnd, windowPosition);
+									consumed = true;
+								}
+								break;
+							case VK_ESCAPE:
+								PostQuitMessage(0);
+								consumed = true;
+								break;
+							case VK_F4:
+								if (Alt)
+								{
+									PostQuitMessage(0);
+									consumed = true;
+								}
+								break;
+							}
+							if (consumed)
+							{
+								break;
+							}
+						}
+					}
+					*/
+					//if (!hasFocus || !inputManager.KeyEventReceived(msg.wParam, msg.lParam))
+					{
+						TranslateMessage(&msg);
+						DispatchMessage(&msg);
+					}
+					break;
+				case WM_MOUSEMOVE:
+					//if (hasFocus)
+					{
+						//int xPosAbsolute = GET_X_LPARAM(msg.lParam);
+						//int yPosAbsolute = GET_Y_LPARAM(msg.lParam);
+
+						//inputManager.UpdateCursor(xPosAbsolute, yPosAbsolute);
+					}
+					//else
+					{
+						TranslateMessage(&msg);
+						DispatchMessage(&msg);
+					}
+					break;
+				default:
+					TranslateMessage(&msg);
+					DispatchMessage(&msg);
+				}
+			}
+		}
+		else
+		{
+			//inputManager.BeginFrame();
+
+			DWORD l_CurrentTime = timeGetTime();
+			float m_ElapsedTime = (float)(l_CurrentTime - m_PreviousTime)*0.001f;
+			m_PreviousTime = l_CurrentTime;
+
+
+			//application.Update(m_ElapsedTime);
+			//application.Render();
+
+
+			//inputManager.EndFrame();
+		}
+	}
+	UnregisterClass(APPLICATION_NAME, wc.hInstance);
+
+	/*
+	
 	s_Context.InitStates();
 	{
 		CDebugRender debugRender(s_Context.GetDevice());
@@ -129,15 +267,6 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
 		CApplication application(&debugRender, &s_Context);
 		application.Init();
-
-		UpdateWindow(hWnd);
-		MSG msg;
-		ZeroMemory(&msg, sizeof(msg));
-
-		// Añadir en el while la condición de salida del programa de la aplicación
-		DWORD m_PreviousTime = timeGetTime();
-
-		bool hasFocus = true;
 
 		while (msg.message != WM_QUIT)
 		{
@@ -246,7 +375,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 	}
 	// Añadir una llamada a la alicación para finalizar/liberar memoria de todos sus datos
 	s_Context.Dispose();
-
+	*/
 	return 0;
 }
 

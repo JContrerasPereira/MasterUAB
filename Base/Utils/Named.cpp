@@ -1,9 +1,5 @@
 #include "Named.h"
 
-CNamed::CNamed()
-{
-
-}
 
 CNamed::CNamed(const CXMLTreeNode &TreeNode)
 {

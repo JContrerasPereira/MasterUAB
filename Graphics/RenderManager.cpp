@@ -1,7 +1,6 @@
 #include "RenderManager.h"
-
 #include "ContextManager.h"
-#include "MaterialManager.h"
+#include "Material\MaterialManager.h"
 
 void CRenderManager::SetCurrentCamera(const CCamera& _CurrentCamera)
 {
@@ -44,6 +43,7 @@ bool CRenderManager::AddRenderableObjectToRenderList(const CRenderableObject* _R
 
 void CRenderManager::Render(CContextManager* _Context, CMaterialManager* _MaterialManager)
 {
+	/*
 	if (m_UseDebugCamera)
 	{
 		_Context->SetCamera(m_DebugCamera);
@@ -112,4 +112,5 @@ void CRenderManager::Render(CContextManager* _Context, CMaterialManager* _Materi
 	}
 
 	m_CurrentRenderlistLength = 0;
+	*/
 }
