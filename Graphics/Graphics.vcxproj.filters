@@ -53,7 +53,6 @@
     <ClInclude Include="Effect\EffectPixelShader.h">
       <Filter>Effect</Filter>
     </ClInclude>
-    <ClInclude Include="ColoredVertex.h" />
     <ClInclude Include="TemplatedRenderableIndexedVertexs.h" />
     <ClInclude Include="RenderableObject\RenderableVertexs.h" />
     <ClInclude Include="Mesh\InstanceMesh.h">

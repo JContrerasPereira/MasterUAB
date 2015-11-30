@@ -25,7 +25,6 @@
     <ClInclude Include="Effect\EffectShader.h" />
     <ClInclude Include="Effect\EffectTechnique.h" />
     <ClInclude Include="Effect\EffectVertexShader.h" />
-    <ClInclude Include="ColoredVertex.h" />
     <ClInclude Include="Mesh\InstanceMesh.h" />
     <ClInclude Include="Mesh\StaticMesh.h" />
     <ClInclude Include="Mesh\StaticMeshManager.h" />

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <static_meshes>
-	<static_mesh name="Box001" filename="C:\Users\Jose\Documents\MasterUAB\bin\VideogameTest\Data\Box001.mesh"/>
+	<static_mesh name="Box001" filename="C:\Users\Jose\Documents\MasterUAB\bin\VideogameTest\Data\Meshes\Box001.mesh"/>
 </static_meshes>
